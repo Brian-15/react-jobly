@@ -8,17 +8,23 @@ const NavigationBar = () => {
       <NavLink exact to='/' className='navbar-brand'>
         <h1>Jobly</h1>
       </NavLink>
-      <Nav className='ml-auto' navbar>
+      <Nav navbar>
         <NavItem>
           <NavLink exact to='/companies'>
             Companies
           </NavLink>
+        </NavItem>
+        <NavItem>
           <NavLink exact to='/jobs'>
             Jobs
           </NavLink>
+        </NavItem>
+        <NavItem>
           <NavLink exact to='/profile'>
             Profile
           </NavLink>
+        </NavItem>
+        <NavItem>
           <NavLink exact to='/logout'>
             Log out
           </NavLink>

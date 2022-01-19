@@ -45,10 +45,10 @@ class JoblyApi {
 
   /** Get details on companies */
 
-  static async getCompanies(minEmployees, maxEmployees, nameLike) {
+  static async getCompanies(nameLike) {
     const { companies } = await this.request(
       `companies`,
-      { minEmployees, maxEmployees, nameLike }
+      { name: nameLike }
     );
     return companies;
   }
@@ -141,7 +141,7 @@ class JoblyApi {
 
   /** create new user */
 
-  static async createUser(username, ...data) {
+  static async createUser(...data) {
     const { user, token } = await this.request(
       'users',
       {...data},

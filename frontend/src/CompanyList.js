@@ -3,15 +3,14 @@ import JoblyApi from './api';
 import { useEffect, useState } from 'react';
 
 const CompanyList = () => {
-
   const [companies, setCompanies] = useState([]);
   useEffect(function getCompaniesOnLoad() {
     getCompanies();
   }, []);
 
+  // awaits company data before setting company hook
   async function getCompanies() {
     const companies = await JoblyApi.getCompanies();
-    console.log(companies)
     setCompanies(companies);
   }
 

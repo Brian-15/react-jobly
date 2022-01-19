@@ -1,25 +1,28 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import JoblyApi from './api';
 import JobList from './JobList';
 
 const Company = () => {
-
   const { handle } = useParams();
-  const {
-    name,
-    description,
-    numEmployees,
-    logoUrl,
-    jobs
-  } = JoblyApi.getCompany(handle);
+  const [c, setCompany] = useState({});
+
+  useEffect(function getCompanyOnLoad() {
+    getCompany();
+  }, []);
+
+  async function getCompany() {
+    const data = await JoblyApi.getCompany(handle);
+    setCompany(data);
+  }
 
   return (
     <div>
-      <h2>{ name }</h2>
-      <img src={logoUrl} />
-      <p>{ description }</p>
-      <p>{ numEmployees } total employees</p>
-      <JobList jobs={jobs} />
+      <h2>{ c.name }</h2>
+      <img src={ c.logoUrl } alt={`${c.name} logo`} />
+      <p>{ c.description }</p>
+      <p>{ c.numEmployees } total employees</p>
+      <JobList jobs={c.jobs} />
     </div>
   );
 };

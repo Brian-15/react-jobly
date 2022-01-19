@@ -16,14 +16,14 @@ const JobList = () => {
   
   return (
     <ul>
-      {jobs.map(({ id, title, salary, equity, company }) => 
+      {jobs.map(j => 
         <Job
-          key={id}
-          id={id}
-          title={title}
-          salary={salary}
-          equity={equity}
-          company={company}
+          key={j.id}
+          id={j.id}
+          title={j.title}
+          salary={j.salary}
+          equity={j.equity}
+          company={j.company}
         />
       )}
     </ul>

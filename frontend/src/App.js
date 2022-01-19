@@ -8,7 +8,7 @@ import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import ProfileForm from './ProfileForm';
 
-async function App() {
+function App() {
   return (
     <>
       <BrowserRouter>

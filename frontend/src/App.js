@@ -1,24 +1,42 @@
 import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+import NavigationBar from './NavigationBar';
+import CompanyList from './CompanyList';
+import JobList from './JobList';
+import JoblyApi from './api';
+import Company from './Company';
+import RegisterForm from './RegisterForm';
+import LoginForm from './LoginForm';
+import ProfileForm from './ProfileForm';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <NavigationBar />
+        <Switch>
+          <Route exact path='/signup'>
+            <RegisterForm />
+          </Route>
+          <Route exact path='/login'>
+            <LoginForm />
+          </Route>
+          <Route exact path='/companies'>
+            <CompanyList companies={JoblyApi.getCompanies()} />
+          </Route>
+          <Route path='/companies/:handle'>
+            <Company />
+          </Route>
+          <Route exact path='/jobs'>
+            <JobList jobs={JoblyApi.getJobs()} />
+          </Route>
+          <Route exact path='/profile'>
+            <ProfileForm />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 }
 

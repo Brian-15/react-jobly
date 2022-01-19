@@ -10,7 +10,7 @@ const CompanySearchForm = ({ getCompanies }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    getCompanies(searchTerm);
+    getCompanies(searchTerm === '' ? undefined : searchTerm);
     setSearchTerm('');
   };
 

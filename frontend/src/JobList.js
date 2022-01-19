@@ -1,6 +1,19 @@
+import { useState, useEffect } from 'react';
 import Job from './Job';
+import JoblyApi from './api';
 
-const JobList = ({ jobs }) => {
+const JobList = () => {
+
+  const [jobs, setJobs] = useState([]);
+  useEffect(function getJobsOnRender() {
+    getJobs();
+  }, []);
+
+  const getJobs = async () => {
+    const jobs = await JoblyApi.getJobs();
+    setJobs(jobs);
+  };
+  
   return (
     <ul>
       {jobs.map(({ id, title, salary, equity, company }) => 

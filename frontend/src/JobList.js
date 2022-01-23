@@ -5,17 +5,12 @@ import JoblyApi from './api';
 const JobList = ({ company }) => {
 
   const [jobs, setJobs] = useState(company ? company.jobs : []);
-  useEffect(function getJobsOnRender() {
-    if (!company) {
-      console.log('len 0', 'getting all jobs')
-      getJobs();
-    }
-    else console.log('len > 0', 'getting company jobs');
-  }, []);
+
+  // get all jobs if no company property provided
+  useEffect(() => !company ? getJobs() : undefined, []);
 
   const getJobs = async () => {
     const jobs = await JoblyApi.getJobs();
-    console.log('api call to jobs')
     setJobs(jobs);
   };
 

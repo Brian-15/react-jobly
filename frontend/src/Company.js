@@ -5,7 +5,7 @@ import JobList from './JobList';
 
 const Company = () => {
   const { handle } = useParams();
-  const [c, setCompany] = useState({});
+  const [c, setCompany] = useState(undefined);
 
   useEffect(function getCompanyOnLoad() {
     getCompany();
@@ -15,15 +15,19 @@ const Company = () => {
     const data = await JoblyApi.getCompany(handle);
     setCompany(data);
   }
+  console.log(c)
 
   return (
-    <div>
-      <h2>{ c.name }</h2>
-      <img src={ c.logoUrl } alt={`${c.name} logo`} />
-      <p>{ c.description }</p>
-      <p>{ c.numEmployees } total employees</p>
-      <JobList jobs={c.jobs} />
-    </div>
+    c ?
+      <div>
+        <h2>{ c.name }</h2>
+        <img src={ c.logoUrl } alt={`${c.name} logo`} />
+        <p>{ c.description }</p>
+        <p>{ c.numEmployees } total employees</p>
+        <JobList company={c} />
+      </div>
+      :
+      <p>Loading...</p>
   );
 };
 

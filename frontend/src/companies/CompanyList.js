@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import CompanyCard from './CompanyCard';
-import JoblyApi from './api';
+import JoblyApi from '../api';
 import CompanySearchForm from './CompanySearchForm';
 
 const CompanyList = () => {

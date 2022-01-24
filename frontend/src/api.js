@@ -141,18 +141,29 @@ class JoblyApi {
 
   /** create new user */
 
-  static async createUser(...data) {
+  static async createUser(data) {
     const { user, token } = await this.request(
-      'users',
-      {...data},
+      'auth/register',
+      { ...data },
       'post'
     );
     return { user, token };
   }
 
+  /** authenticate user, returns token */
+
+  static async authenticate(username, password) {
+    const { token } = await this.request(
+      'auth/token',
+      { username, password },
+      'post'
+    );
+    return token;
+  }
+
   /** update user data by username */
 
-  static async patchUser(username, ...data) {
+  static async patchUser(...{username, data}) {
     const { user } = await this.request(
       `users/${username}`,
       {...data},

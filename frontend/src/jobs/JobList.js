@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Job from './Job';
-import JoblyApi from './api';
+import JoblyApi from '../api';
 
 const JobList = ({ company }) => {
 

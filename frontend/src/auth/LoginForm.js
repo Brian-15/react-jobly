@@ -19,7 +19,7 @@ const LoginForm = ({ login }) => {
   const handleSubmit = evt => {
     evt.preventDefault();
     login(formData);
-    history.push('/profile');
+    history.push('/');
   };
 
   return (
@@ -34,6 +34,7 @@ const LoginForm = ({ login }) => {
         />
         <label htmlFor='password'>Password</label>
         <input
+          type='password'
           name='password'
           value={formData.password}
           onChange={handleChange}

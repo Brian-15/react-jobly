@@ -158,15 +158,17 @@ class JoblyApi {
       { username, password },
       'post'
     );
+    this.token = token;
     return token;
   }
 
   /** update user data by username */
 
-  static async patchUser(...{username, data}) {
+  static async patchUser(username, data) {
+    console.log('update data', username, data)
     const { user } = await this.request(
       `users/${username}`,
-      {...data},
+      data,
       'patch'
     );
     return user;
@@ -182,8 +184,6 @@ class JoblyApi {
     );
     return deleted;
   }
-
-  // obviously, you'll add a lot here ...
 }
 
 // for now, put token ("testuser" / "password" on class)

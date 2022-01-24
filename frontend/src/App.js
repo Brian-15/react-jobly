@@ -32,6 +32,7 @@ function App() {
   const logout = () => {
     setUser(undefined);
     setToken(undefined);
+    JoblyApi.token = '';
   };
 
   return (
@@ -68,7 +69,7 @@ function App() {
             <JobList />
           </Route>
           <Route exact path='/profile'>
-            <ProfileForm userData={user} setUser={setUser} />
+            <ProfileForm setUser={setUser} />
           </Route>
           <Route exact path='/logout'>
             <Logout logout={logout} />

@@ -7,10 +7,6 @@ import './NavigationBar.css';
 const NavigationBar = () => {
   const { token } = useContext(UserContext);
 
-  useEffect(function refreshOnUser() {
-    console.log('refreshed');
-  }, [token]);
-
   return (
     <Navbar expand='md'>
       <NavLink exact to='/' className='navbars-brand'>

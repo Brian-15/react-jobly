@@ -4,17 +4,16 @@ import JoblyApi from '../api';
 import UserContext from './UserContext';
 
 const initialData = {
-  username: '',
   password: '',
   firstName: '',
   lastName: '',
   email: ''
 };
 
-const ProfileForm = ({ userData=initialData, setUser }) => {
-  const { token } = useContext(UserContext);
-  const [formData, setFormData] = useState(userData);
-  
+const ProfileForm = ({ setUser }) => {
+  const { token, user } = useContext(UserContext);
+  const [formData, setFormData] = useState(user? user : initialData);
+
   const handleChange = evt => {
     const { name, value } = evt.target;
     setFormData(data => ({...data, [name]: value}));
@@ -22,9 +21,17 @@ const ProfileForm = ({ userData=initialData, setUser }) => {
 
   const handleSubmit = async evt => {
     evt.preventDefault();
-    const user = await JoblyApi.patchUser(formData);
-    console.log(user);
-    setUser(user);
+    const dataToSend = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+    }
+
+    if (formData.password) {
+      dataToSend.password = formData.password;
+    }
+    const { username, firstName, lastName, email } = await JoblyApi.patchUser(user.username, dataToSend);
+    setUser({ username, firstName, lastName, email });
   };
 
   if (!token) return <Redirect to='login' />;
@@ -32,14 +39,6 @@ const ProfileForm = ({ userData=initialData, setUser }) => {
     <>
       <h1>Edit User Profile</h1>
       <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor='username'>Username</label>
-        <input
-          name='username'
-          value={formData.username}
-          onChange={handleChange}
-        />
-      </div>
       <div>
         <label htmlFor='password'>Password</label>
         <input

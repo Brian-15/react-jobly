@@ -15,7 +15,6 @@ const Company = () => {
     const data = await JoblyApi.getCompany(handle);
     setCompany(data);
   }
-  console.log(c)
 
   return (
     c ?
